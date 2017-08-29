@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+	
+	<script src="/vrview/build/vrview.js"></script>
+	
+    <link href="//fonts.googleapis.com/css?family=Lora|Open+Sans" rel="stylesheet" type="text/css">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+    body {
+        min-height: 100%;
+		width: 100%;
+		 align-items: center;
+		 display: flex;
+    justify-content: center;
+    }
+	
+	html {
+    height: 100%;
+	}
+	</style>
+  </head>
+
+  <body>
+    <div class="container">
+		<div class="content" style="text-align:center" >
+			<div id="vrview"></div>
+			<p class="caption">Click and Drag to view photo in 360 degrees</p>
+	  </div>
+    </div>
+	
+	<script>
+		window.addEventListener('load', onVrViewLoad)
+		function onVrViewLoad() 
+		{
+			var vrView = new VRView.Player('#vrview', {
+			image: '/images/img1.jpg',
+			is_stereo: false
+			});
+			
+			
+			vrView.on('ready',function()
+			{
+				vrView.addHotspot('hotspot-one', {
+				pitch: 30, // In degrees. Up is positive.
+				yaw: 20, // In degrees. To the right is positive.
+				radius:   0.05, // Radius of the circular target in meters.
+				distance: 2, // Distance of target from camera in meters.
+				});
+				
+				vrView.addHotspot('hotspot-two', {
+				pitch: 0, // In degrees. Up is positive.
+				yaw: 50, // In degrees. To the right is positive.
+				radius:   0.05, // Radius of the circular target in meters.
+				distance: 2, // Distance of target from camera in meters.
+				});
+			});
+			
+			vrView.on('click', function(event) {
+				  if (event.id == 'hotspot-one') {
+					// Handle hotspot click.
+					alert('haha')
+				  }
+				});
+			
+
+		}
+			
+		
+	</script>
+	
+  </body>
+</html>
